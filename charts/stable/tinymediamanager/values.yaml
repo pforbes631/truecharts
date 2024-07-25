@@ -1,0 +1,36 @@
+image:
+  repository: tinymediamanager/tinymediamanager
+  tag: 5.0.8@sha256:1a7ce4e32e4d4a14482c74a02c1e7a8cc8ec67410ca357fbe26ea53ca2fd6a3c
+  pullPolicy: IfNotPresent
+service:
+  main:
+    ports:
+      main:
+        port: 10179
+        targetPort: 4000
+persistence:
+  data:
+    enabled: true
+    mountPath: "/data"
+  movies:
+    enabled: true
+    mountPath: "/media/movies"
+  tvshows:
+    enabled: true
+    mountPath: "/media/tvshows"
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    runAsNonRoot: false
+    readOnlyRootFilesystem: false
+    runAsUser: 0
+    runAsGroup: 0
+workload:
+  main:
+    podSpec:
+      containers:
+        main:
+          env:
+            PASSWORD: ""

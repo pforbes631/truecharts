@@ -1,0 +1,29 @@
+image:
+  repository: ghcr.io/linuxserver/mysql-workbench
+  pullPolicy: IfNotPresent
+  tag: 8.0.38@sha256:f521a2af73e79606596bd0d638dc6f09790ed21168d53e03344b2f8ee72d9df4
+service:
+  main:
+    ports:
+      main:
+        targetPort: 3000
+        protocol: http
+        port: 10134
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
+  varrun:
+    enabled: true
+portal:
+  open:
+    enabled: true
+securityContext:
+  container:
+    runAsNonRoot: false
+    readOnlyRootFilesystem: false
+    capabilities:
+      add:
+        - IPC_LOCK
+    runAsUser: 0
+    runAsGroup: 0
